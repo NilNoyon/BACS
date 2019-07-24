@@ -1,0 +1,97 @@
+.clear{
+	clear: both;
+	margin: 0px;
+	padding: 0px;
+}
+.csinner > h3 {
+  color: #ffffff;
+  padding: 45px;
+}
+
+.clm .form-control {
+    width: 63%;
+}
+.clm > label {
+    float: left;
+    width: 35%;
+}
+.clm {
+  margin-bottom: 11px;
+}
+.clm.clmr > label {
+  padding-right: 20px;
+  text-align: right;
+}
+.leftsid {
+  padding-left: 8px;
+}
+.table td input {
+  width: 100% !important;
+}
+.box-body h1 {
+  margin: 0;
+}
+select.form-control {
+    width: 80%;
+}
+.clm input {
+  border: 1px solid #c9c9c9;
+}
+.box-body.report {
+  min-height: 400px;
+  padding-top: 55px;
+}
+.dynamic-orderfs-form-add > td {
+  height: 37px;
+}
+.dynamic-auth-form-add > td {
+  height: 37px;
+    background: #F9F9F9;
+}
+textarea.txtheig {
+  height: 33px;
+}
+#successfull {
+  color: #008000;
+  font-size: 23px;
+  font-weight: bold;
+  text-align: center;
+}
+.inputdeletebutton tr:nth-child(1) > td:last-child{
+  visibility: hidden;
+}
+
+/* By Sadman */
+label.control-label:after{
+  content:"*";
+  color:red;
+}
+.errorlist {
+  color: blue;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.no_padd td {
+  padding: 1px !important;
+}
+/*.rowid .select2.select2-container{*/
+  /*width: 100% !important;*/
+/*}*/
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: #e3e3e3 !important;
+}
+
+.requestnews > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    border-top: 1px solid #ddd;
+    line-height: 1.42857;
+    padding: 1px;
+    vertical-align: top;
+}
+
+.form-control.form-control-nopad {
+  padding: 1px;
+  text-align: center;
+}

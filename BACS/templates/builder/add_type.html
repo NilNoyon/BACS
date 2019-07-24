@@ -1,0 +1,35 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Builder's Dashboard{% endblock title %}
+{% block sidebar %}
+    {% include 'builder/builder_sidebar.html' %}
+{% endblock sidebar %}
+{% block content %}
+<div class="content-wrapper">
+
+<section class="content-header">
+          <h1>Add User Type</h1>
+</section>
+        <!-- Main content -->
+<section class="content">
+  <div class="box">
+    <div class="box-header">
+      <div class="box-body">
+          <form method="POST" role="form" data-toggle="validator">
+          {% csrf_token %}
+            <table align="center" class="table table-bordered table-striped">
+            <tr>
+              <td>Type Name </td>
+              <td><input type="text" name="type_name" placeholder="Enter a type" required></td>
+            </tr>
+            <tr>
+              <td colspan="2"> <button class="btn bg-navy btn-flat margin" type="submit">Add</button></td>
+            </tr>
+         </table>
+          </form>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+{% endblock content %}

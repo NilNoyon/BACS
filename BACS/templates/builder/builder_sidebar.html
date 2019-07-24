@@ -1,0 +1,60 @@
+{% load staticfiles %}
+<aside class="main-sidebar">
+<!-- sidebar: style can be found in sidebar.less -->
+<section class="sidebar">
+  <!-- Sidebar user panel -->
+  <!-- sidebar menu: : style can be found in sidebar.less -->
+  <ul class="sidebar-menu">
+    <li class="header">Operations</li>
+
+    <li class="treeview">
+        <a href="{% url 'builder_dashboard' %}">
+            <i class="fa fa-home"></i>
+            <span>Home</span>
+        </a>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-plus-square"></i>
+            <span>Add User Type</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{% url 'add_type' %}"><i class="fa fa-circle-o"></i> Add User Type </a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-plus-square"></i>
+            <span>Add Projects</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{% url 'add_projects' %}"><i class="fa fa-circle-o"></i> Add Project </a></li>
+            <li><a href="{% url 'project_list' %}"><i class="fa fa-circle-o"></i> Project List</a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-plus-square"></i>
+            <span> Add User </span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{% url 'create_user' %}"><i class="fa fa-circle-o"></i> Add User</a></li>
+            <li><a href="{% url 'client_list' %}"><i class="fa fa-circle-o"></i> Client List</a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-plus-square"></i>
+            <span> Aissgn Shareholder </span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{% url 'assign_shareholder' %}"><i class="fa fa-circle-o"></i> Assign Shareholder</a></li>
+            <li><a href="{% url 'assign_shareholder_list' %}"><i class="fa fa-circle-o"></i> Assign Shareholder List</a></li>
+        </ul>
+    </li>
+</section>
+</aside>

@@ -1,0 +1,197 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>BACS | {% block title %}{% endblock title %}</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'dist/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'dist/css/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'dist/css/AdminLTE.min.css' %}">
+    <link rel="stylesheet" href="{% static 'dist/css/skins/_all-skins.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/iCheck/flat/blue.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/morris/morris.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/datepicker/datepicker3.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/datatables/dataTables.bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/daterangepicker/daterangepicker-bs3.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'dist/css/custom.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'dist/css/toastr.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/select2/select2.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/iCheck/all.css' %}">
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="{% static 'dist/js/moment.min.js' %}"></script>
+    <script src="{% static 'plugins/jQuery/jQuery-2.1.4.min.js' %}"></script>
+    <script src="{% static 'dist/js/knockout-3.4.0.js' %}"></script>
+    <script src="{% static 'plugins/js-cookies/js.cookies.js' %}"></script>
+    <script src="{% static 'plugins/select2/select2.full.js' %}"></script>
+    {% block stylesheets %}{% endblock stylesheets %}
+    {% block script %}{% endblock script %}
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar">
+<div class="wrapper">
+    <header class="main-header">
+        <a href="#" class="logo">
+            <span class="logo-mini"><b>BACS</b></span>
+            <span class="logo-lg"><b>BACS</b></span>
+        </a>
+        <nav class="navbar navbar-static-gittop" role="navigation">
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Hello, {{ user.get_username }}</a></li>
+                    <li><a href="/logout">Sign out</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    {% block sidebar %}{% endblock sidebar %}
+    <!-- Content Wrapper. Contains page content -->
+    {% block content %}
+    {% endblock content %}
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+        </div>
+        <strong>Copyright &copy; 2019 <a href="#">BACS</a>.</strong> All rights reserved.
+    </footer>
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+</div><!-- ./wrapper -->
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/underscore-min.js' %}"></script>
+<script src="{% static 'js/jquery.serialize-object.js' %}"></script>
+<script src="{% static 'plugins/datepicker/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'plugins/datatables/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-validator/validator.min.js' %}"></script>
+<script src="{% static 'plugins/daterangepicker/daterangepicker.js' %}"></script>
+<script src="{% static 'plugins/slimScroll/jquery.slimscroll.min.js' %}"></script>
+<script src="{% static 'dist/js/app.min.js' %}"></script>
+<script src="{% static 'plugins/jQuery/jquery.formset.js' %}"></script>
+<script src="{% static 'dist/js/toastr.js' %}"></script>
+<script src="{% static 'plugins/iCheck/icheck.min.js' %}"></script>
+<script>
+    $(function () {
+        //Date range picker with time picker
+        var date = new Date();
+        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        $('#reservationtime').daterangepicker({
+            singleDatePicker: true //<==HERE
+        });
+        $('.reservationtime').daterangepicker({
+            singleDatePicker: true, //<==HERE
+            format: 'YYYY-MM-DD'
+        });
+    });
+    $(document).ready(function () {
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            todayHighlight: 'True',
+            autoclose: 'True'
+
+        });
+        $('.frompresentdate').datepicker({
+            format: 'yyyy-mm-dd',
+            todayHighlight: 'True',
+            autoclose: 'True',
+            startDate: '-0d'
+
+        });
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-yellow',
+            radioClass: 'iradio_square',
+            increaseArea: '20%' // optional
+        });
+        $('.select2add').select2();
+        // ToastrJS setting
+        // @Author: Rahit
+        toastr.options = {
+          "closeButton": false,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": true,
+            "positionClass": "toast-bottom-left",
+          "preventDuplicates": false,
+          "onclick": null,
+          "showDuration": "500",
+          "hideDuration": "1000",
+          "timeOut": "10000",
+          "extendedTimeOut": "2000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        };
+        {% if messages %}
+            {% for message in messages %}
+                toastr['{{ message.level_tag }}']('{{ message }}')
+            {% endfor %}
+        {% endif %}
+    });
+</script>
+<script src="{% static 'dist/js/custom.js' %}"></script>
+{# By Sadman. CSRF Token Handler for API #}
+<script>
+    var csrftoken = Cookies.get('csrftoken');
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+//Prevent Enter to submit the form
+$('input').bind('keydown', function(e) {
+    if(e.keyCode==13){
+        e.preventDefault();
+    }
+});
+
+ $('input').keydown(function (e) {
+     if (e.which === 13) {
+         var index = $('input').index(this) + 1;
+         $('input').eq(index).focus();
+     }
+ });
+ // Prevent input type=number negative value
+{#$("input[type=number]")[0].setAttribute("min", 0);#}
+
+$("form input[type=number]").each(function(){
+    console.log("hello number"+ this);
+    $(this).attr("min", 0);
+});
+</script>
+<script>
+    $(function () {
+        $('#example1').DataTable();
+
+        $('#example2').DataTable();
+
+        $('#example3').DataTable({
+            'paging'      : true,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false
+        });
+    })
+</script>
+
+</body>
+</html>
