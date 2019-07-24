@@ -1,0 +1,68 @@
+.clear{
+	clear: both;
+	margin: 0px;
+	padding: 0px;
+}
+.csinner > h3 {
+  color: #ffffff;
+  padding: 45px;
+}
+
+.clm .form-control {
+    width: 63%;
+}
+.clm > label {
+    float: left;
+    width: 35%;
+}
+.clm {
+  margin-bottom: 11px;
+}
+.clm.clmr > label {
+  padding-right: 20px;
+  text-align: right;
+}
+.leftsid {
+  padding-left: 8px;
+}
+.table td input {
+  width: 100% !important;
+}
+.box-body h1 {
+  margin: 0;
+}
+select.form-control {
+    width: 80%;
+}
+.clm input {
+  border: 1px solid #c9c9c9;
+}
+.box-body.report {
+  min-height: 400px;
+  padding-top: 55px;
+}
+.dynamic-orderfs-form-add > td {
+  height: 37px;
+}
+.dynamic-auth-form-add > td {
+  height: 37px;
+    background: #F9F9F9;
+}
+textarea.txtheig {
+  height: 33px;
+}
+#successfull {
+  color: #008000;
+  font-size: 23px;
+  font-weight: bold;
+  text-align: center;
+}
+.inputdeletebutton tr:nth-child(1) > td:last-child{
+  visibility: hidden;
+}
+
+/* By Sadman */
+label.control-label:after{
+  content:"*";
+  color:red;
+}
