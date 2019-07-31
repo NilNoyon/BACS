@@ -7,7 +7,7 @@
 <div class="content-wrapper">
 
 <section class="content-header">
-          <h1>Project List</h1>
+          <h1>Project Collected Amount</h1>
 
 </section>
         <!-- Main content -->
@@ -15,7 +15,7 @@
     <!-- TABLE: LATEST ORDERS -->
       <div class="box box-info">
         <div class="box-header with-border">
-          <h3 class="box-title">Project List</h3>
+          <h3 class="box-title">Project Collected Amount</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -30,33 +30,26 @@
               <thead>
               <tr>
                 <th>SI</th>
-                <th>Project's Name</th>
-                <th>Building's Name</th>
-                <th>Address</th>
-                <th>Builder's Name</th>
-                <th>Builder's Address</th>
-                <th>Estimated Cost</th>
-                <th>Action</th>
+                <th>Date</th>
+                <th>From User</th>
+                <th>For Project</th>
+                <th>Amount</th>
               </tr>
               </thead>
               <tbody>
-                {% for i in project_datas %}
+                {% for i in datas %}
                 	<tr>
                 		<td>{{ forloop.counter }}</td>
-                		<td>{{ i.pname }}</td>
-                		<td>{{ i.building_name }}</td>
-                		<td>{{ i.address }}</td>
-                		<td>{{ i.builders_name }}</td>
-                    <td>{{ i.builders_address }}</td>
-                    <td>{{ i.estimated_cost }}</td>
-                		<td>
-                      <a href="#" class="btn btn-primary a-btn-slide-text">
-                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                            <span><strong>Edit</strong></span>
-                        </a>  
-                    </td>
+                    <td>{{ i.date }}</td>
+                		<td>{{ i.from_user }}</td>
+                		<td>{{ i.for_project.pname }}</td>
+                		<td>{{ i.amount }}</td>
                 	</tr>
                 {% endfor %}
+                <tr>
+                  <td colspan="3" style="text-align: right;"><b>Total Collected Amount : </b></td>
+                  <td><b>{{ total_collected_amount }}</b></td>
+                </tr>
               </tbody>
             </table>
           </div>

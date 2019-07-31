@@ -1,5 +1,6 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from django.db import models
+from decimal import Decimal
 
 # Create your models here.
 
@@ -14,6 +15,7 @@ class Projects(models.Model):
 	address = models.CharField(max_length=255,blank=True,null=True)
 	builders_name = models.CharField(max_length=150,blank=True,null=True)
 	builders_address = models.CharField(max_length=150,blank=True,null=True)
+	estimated_cost = models.DecimalField(max_digits=12, decimal_places=2, default=Decimal(0.00), null=True, blank=True)
 	created_by = models.ForeignKey('auth.User',blank=True,null=True,on_delete=models.CASCADE)
 	created_at = models.DateField(auto_now_add=True,blank=True)
 	updated_at = models.DateField(auto_now_add=True,blank=True)
@@ -25,7 +27,28 @@ class ShareholderList(models.Model):
 	created_at = models.DateField(auto_now_add=True,blank=True)
 
 class ClientUser(models.Model):
-	user_type = models.ForeignKey('builder.UserType',blank=True,null=True, on_delete=models.CASCADE)
+	user_type = models.ForeignKey('auth.Group',blank=True,null=True, on_delete=models.CASCADE)
 	user = models.ForeignKey('auth.User', blank=True, null=True, on_delete=models.CASCADE, related_name='client_user')
 	created_by = models.ForeignKey('auth.User',blank=True,null=True,on_delete=models.CASCADE)
 	created_at = models.DateField(auto_now_add=True,blank=True)
+
+class CostCategory(models.Model):
+	category = models.CharField(max_length=100, blank=True, null=True)
+	created_by = models.ForeignKey('auth.User',blank=True,null=True,on_delete=models.CASCADE,related_name='category_creator')
+	created_at = models.DateField(auto_now_add=True,blank=True)
+
+class Cost(models.Model):
+	cost_info = models.CharField(max_length=150,blank=True,null=True)
+	cost = models.DecimalField(max_digits=12, decimal_places=2, default=Decimal(0.00), null=True, blank=True)
+	cost_category = models.ForeignKey('builder.CostCategory',blank=True,null=True,on_delete=models.CASCADE)
+	for_project = models.ForeignKey('builder.Projects',blank=True,null=True,related_name='projects_cost',on_delete=models.CASCADE)
+	created_by = models.ForeignKey('auth.User',blank=True,null=True,on_delete=models.CASCADE,related_name='cost_inserter')
+	created_at = models.DateField(auto_now_add=True,blank=True)
+
+class CollectedAmount(models.Model):
+	amount = models.DecimalField(max_digits=12, decimal_places=2, default=Decimal(0.00), null=True, blank=True)
+	from_user = models.ForeignKey('auth.User',blank=True,null=True,related_name='from_user',on_delete=models.CASCADE)
+	for_project = models.ForeignKey('builder.Projects',blank=True,null=True,related_name='for_project',on_delete=models.CASCADE)
+	created_by = models.ForeignKey('auth.User',blank=True,null=True,related_name='collected_by',on_delete=models.CASCADE)
+	date = models.DateField(blank=True,null=True)
+	created_at = models.DateField(auto_now_add=True,blank=True,null=True)

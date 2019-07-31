@@ -1,13 +1,13 @@
 {% extends 'layouts/base.html' %}
-{% block title %}Builder's Dashboard{% endblock title %}
+{% block title %}Client's Dashboard{% endblock title %}
 {% block sidebar %}
-    {% include 'builder/builder_sidebar.html' %}
+    {% include 'clients/clients_sidebar.html' %}
 {% endblock sidebar %}
 {% block content %}
 <div class="content-wrapper">
 
 <section class="content-header">
-          <h1>Project List</h1>
+          <h1>Project Cost</h1>
 
 </section>
         <!-- Main content -->
@@ -15,7 +15,7 @@
     <!-- TABLE: LATEST ORDERS -->
       <div class="box box-info">
         <div class="box-header with-border">
-          <h3 class="box-title">Project List</h3>
+          <h3 class="box-title">Project Cost Report</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -30,33 +30,26 @@
               <thead>
               <tr>
                 <th>SI</th>
-                <th>Project's Name</th>
-                <th>Building's Name</th>
-                <th>Address</th>
-                <th>Builder's Name</th>
-                <th>Builder's Address</th>
-                <th>Estimated Cost</th>
-                <th>Action</th>
+                <th>Category</th>
+                <th>Cost Info</th>
+                <th>Date</th>
+                <th>Amount</th>
               </tr>
               </thead>
               <tbody>
-                {% for i in project_datas %}
+                {% for i in datas %}
                 	<tr>
-                		<td>{{ forloop.counter }}</td>
-                		<td>{{ i.pname }}</td>
-                		<td>{{ i.building_name }}</td>
-                		<td>{{ i.address }}</td>
-                		<td>{{ i.builders_name }}</td>
-                    <td>{{ i.builders_address }}</td>
-                    <td>{{ i.estimated_cost }}</td>
-                		<td>
-                      <a href="#" class="btn btn-primary a-btn-slide-text">
-                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                            <span><strong>Edit</strong></span>
-                        </a>  
-                    </td>
+                    <td>{{ forloop.counter }}</td>
+                		<td>{{ i.cost_category.category }}</td>
+                		<td>{{ i.cost_info }}</td>
+                		<td>{{ i.created_at }}</td>
+                		<td>{{ i.cost }}</td>
                 	</tr>
                 {% endfor %}
+                <tr>
+                  <td colspan="4" style="text-align: right;"><b>Total Cost : </b></td>
+                  <td><b>{{ total_cost }}</b></td>
+                </tr>
               </tbody>
             </table>
           </div>

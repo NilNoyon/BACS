@@ -56,5 +56,27 @@
             <li><a href="{% url 'assign_shareholder_list' %}"><i class="fa fa-circle-o"></i> Assign Shareholder List</a></li>
         </ul>
     </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-plus-square"></i>
+            <span> Cost Information </span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{% url 'add_cost_category' %}"><i class="fa fa-circle-o"></i> Cost Category</a></li>
+            <li><a href="{% url 'add_cost' %}"><i class="fa fa-circle-o"></i>Add Cost</a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-plus-square"></i>
+            <span> Collected Amount Info </span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{% url 'add_collected_amount' %}"><i class="fa fa-circle-o"></i> Add Amount</a></li>
+            <li><a href="{% url 'collected_amount_list' %}"><i class="fa fa-circle-o"></i>Collected Amount List</a></li>
+        </ul>
+    </li>
 </section>
 </aside>
