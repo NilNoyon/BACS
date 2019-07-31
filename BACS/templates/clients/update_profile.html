@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Client's Dashboard{% endblock title %}
+{% block sidebar %}
+    {% include 'clients/clients_sidebar.html' %}
+{% endblock sidebar %}
+{% block content %}
+<div class="content-wrapper">
+
+<section class="content-header">
+          <h1>Update Profile</h1>
+</section>
+        <!-- Main content -->
+<section class="content">
+  <div class="box">
+    <div class="box-header">
+      <div class="box-body">
+          <form method="POST" role="form" data-toggle="validator">
+          {% csrf_token %}
+            <table align="center" class="table table-bordered table-striped">
+            <tr>
+              <td>First Name</td>
+              <td><input type="text" name="first_name" placeholder="Enter First Name" required></td>
+            </tr>
+            <tr>
+              <td>Last Name</td>
+              <td><input type="password" name="last_name" placeholder="Enter Last Name" required></td>
+            </tr>
+            <tr>
+              <td colspan="2"> <button class="btn bg-navy btn-flat margin" type="submit">Add</button></td>
+            </tr>
+         </table>
+          </form>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+{% endblock content %}

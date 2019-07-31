@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<aside class="main-sidebar">
+<!-- sidebar: style can be found in sidebar.less -->
+<section class="sidebar">
+  <!-- Sidebar user panel -->
+  <!-- sidebar menu: : style can be found in sidebar.less -->
+  <ul class="sidebar-menu">
+    <li class="header">Operations</li>
+
+    <li class="treeview">
+        <a href="{% url 'client_dashboard' %}">
+            <i class="fa fa-home"></i>
+            <span>Home</span>
+        </a>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-plus-square"></i>
+            <span>Profile</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{% url 'update_profile' %}"><i class="fa fa-circle-o"></i> Update Profile </a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-plus-square"></i>
+            <span>View Given Amount</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{% url 'view_given_amount' %}"><i class="fa fa-circle-o"></i> View Given Amount </a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-plus-square"></i>
+            <span>View Projects Cost</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{% url 'view_cost_info' %}"><i class="fa fa-circle-o"></i> Cost Info </a></li>
+        </ul>
+    </li>
+</section>
+</aside>

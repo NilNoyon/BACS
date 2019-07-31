@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>BACS | Login</title>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta content="width=device-width" name="viewport">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -15,31 +15,47 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        pre {
+             display: block; 
+             padding: 9.5px; 
+             margin: 0 0 10px; 
+             font-size: 13px; 
+             line-height: 1.42857143; 
+             color: #333; 
+             word-break: break-all; 
+             word-wrap: break-word; 
+             background-color: rgb(210, 214, 222); 
+             border: 0px solid #ccc; 
+             border-radius: 4px; 
+        }
+    </style>
 </head>
 <body class="hold-transition login-page">
-<div class="login-box" style="height: 100%;">
-    <div class="login-logo">
-        <a href="#"><b>BACS</b></a>
-    </div>
-    <div class="login-box-body">
-        <form action="{% url 'login' %}" method="POST">
-            {% csrf_token %}
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="User Name" id="id_username" name="username">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Password" id="id_password" name="password">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
-            <div class="row">
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat" >Sign in</button>
-                    <input type="hidden" name="next" value="{{ next }}"/>
-                </div><!-- /.col -->
-            </div>
-        </form>        ​
-    </div><!-- /.login-box-body -->
-</div><!-- /.login-box -->
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="#"><b>BACS</b></a>
+        </div>
+        <div class="login-box-body">
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control" placeholder="User Name" id="id_username" name="username">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="password" class="form-control" placeholder="Password" id="id_password" name="password">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" >Sign in</button>
+                        <input type="hidden" name="next" value="{{ next }}"/>
+                    </div><!-- /.col -->
+                </div>
+            </form>        ​
+        </div><!-- /.login-box-body -->
+    </div><!-- /.login-box -->
+
 </body>
 </html>

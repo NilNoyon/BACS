@@ -1,0 +1,38 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Client's Dashboard{% endblock title %}
+{% block sidebar %}
+    {% include 'clients/clients_sidebar.html' %}
+{% endblock sidebar %}
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+      <section class="content-header"><h1> Given Amount Info </h1></section>
+      <section class="content">
+      <div class="row">
+      <div class="col-md-12">
+       <div class="box box-default">
+           <div class="box-body report">
+               <form action="" method="POST">
+                   {% csrf_token %}
+                   <div class="col-md-6 col-md-offset-3">
+                           <lable>Select Project</lable>
+                           <select name="project" class='form-control' style='width:100%'>
+                              <option>--------</option>
+                               {% for project in projects %}
+                                    <option value="{{ project.projects.id }}">{{ project.projects.pname }}</option>
+                                {% endfor %}
+                           </select>
+                       <br>
+                       <br>
+                       <br>
+                       <button class="btn btn-block btn-lg" type="submit" style="background-color: #872626;color: white;">Generate Report</button>
+                   </div>
+               </form>
+            </div>
+       </div>
+      </div>
+      </div>
+      </section>
+      </div><!-- /.content-wrapper -->
+{% endblock content %}
