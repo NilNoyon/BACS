@@ -40,6 +40,29 @@ def project_list(request):
 	}
 	return render(request,'builder/project_list.html',context)
 
+def delete_project(request,pid):
+	project = Projects.objects.filter(id=pid)
+	project.delete()
+	messages.add_message(request, messages.SUCCESS, 'SuccessFully Deleted Project')
+	return HttpResponseRedirect(reverse('project_list'))
+
+def edit_project(request,pid):
+	if request.method == 'POST':
+		pname = request.POST.get('pname')
+		building_name = request.POST.get('building_name')
+		address = request.POST.get('address')
+		builders_name = request.POST.get('builders_name')
+		builders_address = request.POST.get('builders_address')
+		estimated_cost = request.POST.get('estimated_cost')
+
+		project = Projects.objects.filter(id=pid).update(pname=pname,building_name=building_name,address=address,builders_name=builders_name,builders_address=builders_address,estimated_cost=estimated_cost)
+		messages.add_message(request, messages.SUCCESS, 'SuccessFully Updated')
+		return HttpResponseRedirect(reverse('project_list'))
+	else:
+		datas = Projects.objects.filter(id=pid)
+		return render(request,'builder/edit_project.html',{'datas':datas})
+
+
 def add_type(request):
 	if request.method == 'POST':
 		type_name = request.POST.get('type_name')
@@ -89,14 +112,45 @@ def client_list(request):
 	}
 	return render(request,'builder/client_list.html',context)
 
+def delete_client(request,uid):
+	client = ClientUser.objects.filter(id=uid).first()
+	print(client.user_id)
+	user = User.objects.filter(id=client.user_id)
+	client.delete()
+	user.delete()
+	messages.add_message(request, messages.SUCCESS, 'SuccessFully Deleted User')
+	return HttpResponseRedirect(reverse('client_list'))
+
+def edit_client(request,uid):
+	if request.method == 'POST':
+		first_name = request.POST.get('first_name')
+		last_name = request.POST.get('last_name')
+		email = request.POST.get('user_email')
+		user_type = request.POST.get('user_type')
+
+		# if User.objects.filter(email=email):
+		# 	messages.add_message(request, messages.ERROR, 'This email is already used !')
+		# 	return HttpResponseRedirect(reverse('client_list'))
+		# else:
+		datas = ClientUser.objects.filter(id=uid).first()
+		user = User.objects.filter(id=datas.user.id).update(first_name=first_name,last_name=last_name,email=email)
+		groups = Group.objects.get(id=user_type)
+		client = ClientUser.objects.filter(id=uid).update(user_type=groups)
+		messages.add_message(request, messages.SUCCESS, 'SuccessFully Updated')
+		return HttpResponseRedirect(reverse('client_list'))
+	else:
+		datas = ClientUser.objects.filter(id=uid).first()
+		user_type = Group.objects.all()
+		return render(request,'builder/edit_client.html',{'datas':datas,'types':user_type})
+
 def assign_shareholder(request):
 	form = ShareholderList()
 	if request.method == 'POST':
-		projects_name = request.POST.get('project')
-		user_name = request.POST.get('user')
-		user = User.objects.filter(id=user_name).first()
-		projects = Projects.objects.filter(id=projects_name).first()
-		data = ShareholderList.objects.create(user=user,projects=projects,created_by=request.user)
+		project = request.POST.get('project')
+		user = request.POST.get('user')
+		get_user = User.objects.filter(id=user).first()
+		projects = Projects.objects.filter(id=project).first()
+		data = ShareholderList.objects.create(user=get_user,projects=projects,created_by=request.user)
 		messages.add_message(request, messages.SUCCESS, 'SuccessFully Assigned !!')
 		return HttpResponseRedirect(reverse('assign_shareholder'))
 	else:
@@ -118,6 +172,11 @@ def project_wise_shareholder_list(request):
 	}
 	return render(request,'builder/project_wise_user_list.html',context)
 
+def delete_assigned_shareholder(request,sid):
+	client = ShareholderList.objects.filter(id=sid).first()
+	client.delete()
+	messages.add_message(request, messages.SUCCESS, 'SuccessFully Deleted User')
+	return HttpResponseRedirect(reverse('assign_shareholder_list'))
 
 def add_cost_category(request):
 	if request.method == 'POST':
@@ -192,3 +251,56 @@ def collected_amount_list(request):
 		projects = Projects.objects.filter(created_by=request.user)
 		print(projects)
 		return render(request,'builder/collected_amount_statement.html',{'projects':projects})
+
+def delete_collected_amount(request,cid):
+	amount = CollectedAmount.objects.filter(id=cid).first()
+	amount.delete()
+	messages.add_message(request, messages.SUCCESS, 'SuccessFully Deleted Amount')
+	return HttpResponseRedirect(reverse('collected_amount_list'))
+
+def edit_collected_amount(request,cid):
+	if request.method == 'POST':
+		amount = request.POST.get('amount')
+		data = CollectedAmount.objects.filter(id=cid).update(amount=amount)
+		messages.add_message(request, messages.SUCCESS, 'SuccessFully Updated')
+		return HttpResponseRedirect(reverse('collected_amount_list'))
+	else:
+		datas = CollectedAmount.objects.filter(id=cid).first()
+		return render(request,'builder/edit_collected_amount.html',{'datas':datas})
+
+def cost_info_list(request):
+	if request.method == "POST":
+		project = request.POST.get('project')
+		cost_info = Cost.objects.filter(for_project=project)
+
+		context = {
+			'cost_info':cost_info
+		}
+
+		return render(request,'builder/cost_list.html',context)
+	else:
+		project_list = Projects.objects.filter(created_by=request.user)
+
+		context = {
+			'projects':project_list,
+		}
+		return render(request,'builder/cost_info_list.html',context)
+
+def delete_cost_info(request,cid):
+	amount = Cost.objects.filter(id=cid)
+	amount.delete()
+	messages.add_message(request, messages.SUCCESS, 'SuccessFully Deleted Cost Amount')
+	return HttpResponseRedirect(reverse('cost_info_list'))
+
+def edit_cost_info(request,cid):
+	if request.method == 'POST':
+		amount = request.POST.get('amount')
+		data = Cost.objects.filter(id=cid).update(cost=amount)
+		messages.add_message(request, messages.SUCCESS, 'SuccessFully Updated')
+		return HttpResponseRedirect(reverse('cost_info_list'))
+	else:
+		cost_info = Cost.objects.filter(created_by=request.user).first()
+		context = {
+			'datas':cost_info,
+		}
+		return render(request,'builder/edit_cost_info.html',context)

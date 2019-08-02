@@ -7,7 +7,7 @@
 <div class="content-wrapper">
 
 <section class="content-header">
-    <h1>Add Cost Category</h1>
+          <h1>Edit Cost Amount</h1>
 </section>
         <!-- Main content -->
 <section class="content">
@@ -18,8 +18,8 @@
           {% csrf_token %}
             <table align="center" class="table table-bordered table-striped">
             <tr>
-              <td>Cost Category </td>
-              <td><input type="text" name="category_name" placeholder="Enter a Cost Category" required></td>
+              <td>Cost Amount </td>
+              <td><input type="number" name="amount" value="{{ datas.cost }}" required></td>
             </tr>
             <tr>
               <td colspan="2" align="center"> <button class="btn bg-navy btn-flat margin" type="submit" style="width: 80%;">Add</button></td>

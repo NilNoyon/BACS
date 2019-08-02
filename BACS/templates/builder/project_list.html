@@ -26,7 +26,7 @@
         <!-- /.box-header -->
         <div class="box-body">
           <div class="table-responsive">
-            <table class="table no-margin">
+            <table id="example2" class="table table-striped table-bordered">
               <thead>
               <tr>
                 <th>SI</th>
@@ -50,10 +50,14 @@
                     <td>{{ i.builders_address }}</td>
                     <td>{{ i.estimated_cost }}</td>
                 		<td>
-                      <a href="#" class="btn btn-primary a-btn-slide-text">
-                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                            <span><strong>Edit</strong></span>
-                        </a>  
+                      <a href="{% url 'edit_project' i.id %}" class="btn btn-primary a-btn-slide-text">
+                          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                          <span></span>
+                      </a>
+                      <a href="{% url 'delete_project' i.id %}" class="btn btn-danger a-btn-slide-text">
+                          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                          <span></span>
+                      </a>  
                     </td>
                 	</tr>
                 {% endfor %}

@@ -7,7 +7,7 @@
 <div class="content-wrapper">
 
 <section class="content-header">
-    <h1>Add Cost Category</h1>
+          <h1>Edit User</h1>
 </section>
         <!-- Main content -->
 <section class="content">
@@ -18,8 +18,27 @@
           {% csrf_token %}
             <table align="center" class="table table-bordered table-striped">
             <tr>
-              <td>Cost Category </td>
-              <td><input type="text" name="category_name" placeholder="Enter a Cost Category" required></td>
+              <td>First Name</td>
+              <td><input type="text" name="first_name" value="{{ datas.user.first_name }}" required></td>
+            </tr>
+            <tr>
+              <td>Last Name</td>
+              <td><input type="text" name="last_name" value="{{ datas.user.last_name }}" required></td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td><input type="email" name="user_email" value="{{ datas.user.email }}" required></td>
+            </tr>
+            <tr>
+              <td>Type</td>
+              <td>
+                <select name="user_type" class='form-control' style='width:100%'>
+                    <option>-------</option>
+                     {% for type in types %}
+                          <option value="{{ type.id }}">{{ type.name }}</option>
+                      {% endfor %}
+                 </select>
+              </td>
             </tr>
             <tr>
               <td colspan="2" align="center"> <button class="btn bg-navy btn-flat margin" type="submit" style="width: 80%;">Add</button></td>

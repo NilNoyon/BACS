@@ -7,7 +7,7 @@
 <div class="content-wrapper">
 
 <section class="content-header">
-          <h1>Assigned Shareholder List</h1>
+          <h1>Cost List</h1>
 
 </section>
         <!-- Main content -->
@@ -15,7 +15,7 @@
     <!-- TABLE: LATEST ORDERS -->
       <div class="box box-info">
         <div class="box-header with-border">
-          <h3 class="box-title">Assigned Shareholder List</h3>
+          <h3 class="box-title">Cost List</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -30,30 +30,26 @@
               <thead>
               <tr>
                 <th>SI</th>
-                <th>Project's Name</th>
-                <th>Building's Name</th>
-                <th>Address</th>
-                <th>Builder's Name</th>
-                <th>Builder's Address</th>
-                <th>Shareholder Name</th>
+                <th>Cost Info</th>
+                <th>Cost</th>
                 <th>Action</th>
               </tr>
               </thead>
               <tbody>
-                {% for i in datas %}
+                {% for i in cost_info %}
                 	<tr>
                 		<td>{{ forloop.counter }}</td>
-                		<td>{{ i.projects.pname }}</td>
-                		<td>{{ i.projects.building_name }}</td>
-                		<td>{{ i.projects.address }}</td>
-                		<td>{{ i.projects.builders_name }}</td>
-                    <td>{{ i.projects.builders_address }}</td>
-                		<td>{{ i.user.username }}</td>
-                    <td>
-                      <a href="{% url 'delete_assigned_shareholder' i.id %}" class="btn btn-danger a-btn-slide-text">
-                          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                		<td>{{ i.cost_info }}</td>
+                		<td>{{ i.cost }}</td>
+                		<td>
+                      <a href="{% url 'edit_cost_info' i.id %}" class="btn btn-primary a-btn-slide-text">
+                          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                           <span></span>
                       </a>
+                      <a href="{% url 'delete_cost_info' i.id %}" class="btn btn-danger a-btn-slide-text">
+                          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                          <span></span>
+                      </a>  
                     </td>
                 	</tr>
                 {% endfor %}

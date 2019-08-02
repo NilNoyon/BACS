@@ -18,10 +18,10 @@
       <div class="box-body">
           <form method="POST" role="form" data-toggle="validator">
           {% csrf_token %}
-            <table align="center" class="table table-bordered table-striped">
+          <table align="center" class="table table-bordered table-striped">
             <tr>
               <td>Projects Name </td>
-              <td>{{ form.pname}} {{ form.pname.errors }}</td>
+              <td><input type="text" name="pname" value=""></td>
             </tr>
             <tr>
               <td>Building's Name</td>
@@ -44,7 +44,7 @@
               <td>{{ form.estimated_cost }} {{ form.estimated_cost.errors }}</td>
             </tr>
             <tr>
-            <td colspan="2"> <button class="btn bg-navy btn-flat margin" type="submit">Add</button></td>
+            <td colspan="2" align="center"> <button class="btn bg-navy btn-flat margin" type="submit" style="width: 80%;">Add</button></td>
             </tr>
          </table>
           </form>
@@ -57,7 +57,7 @@
 <script>
     function getData(sel)
         {
-           if (sel.value !== '--Please select media type--'){
+           if (sel.value !== '--Please select a type--'){
                document.getElementById('sbmt').removeAttribute('disabled');
            }
         }
