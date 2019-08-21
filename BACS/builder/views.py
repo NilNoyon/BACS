@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
+from django.db.models.aggregates import Sum
 from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
 from django.contrib.auth import authenticate
@@ -11,7 +12,24 @@ from django.contrib.auth.models import User,Group
 # Create your views here.
 
 def dashboard_builder(request):
-	return render(request,'builder/dashboard.html')
+	total_projects = Projects.objects.filter(created_by=request.user.id).count()
+	total_created_building = Projects.objects.filter(created_by=request.user.id).count()
+	total_shareholders = ClientUser.objects.filter(created_by=request.user.id).count()
+	building_cost = Cost.objects.filter(created_by=request.user.id).aggregate(total_cost=Sum('cost'))
+	print('cost: ',building_cost)
+	average_cost_per_building = round(building_cost['total_cost'] / total_created_building)
+
+	data = Projects.objects.filter(created_by=request.user)[:5]
+	get_client = ClientUser.objects.filter(created_by=request.user)[:5]
+	context = {
+		'total_projects':total_projects,
+		'total_shareholders':total_shareholders,
+		'total_created_building':total_created_building,
+		'average_cost_per_building':average_cost_per_building,
+		'project_datas':data,
+		'all_clients':get_client,
+	}
+	return render(request,'builder/dashboard.html',context)
 
 def add_projects(request):
 	"""
@@ -54,8 +72,10 @@ def edit_project(request,pid):
 		builders_name = request.POST.get('builders_name')
 		builders_address = request.POST.get('builders_address')
 		estimated_cost = request.POST.get('estimated_cost')
+		duration = request.POST.get('duration')
+		total_floor = request.POST.get('total_floor')
 
-		project = Projects.objects.filter(id=pid).update(pname=pname,building_name=building_name,address=address,builders_name=builders_name,builders_address=builders_address,estimated_cost=estimated_cost)
+		project = Projects.objects.filter(id=pid).update(pname=pname,building_name=building_name,address=address,builders_name=builders_name,builders_address=builders_address,estimated_cost=estimated_cost,duration=duration,total_floor=total_floor)
 		messages.add_message(request, messages.SUCCESS, 'SuccessFully Updated')
 		return HttpResponseRedirect(reverse('project_list'))
 	else:
@@ -224,7 +244,7 @@ def add_collected_amount(request):
 		return HttpResponseRedirect(reverse('add_collected_amount'))
 	else:
 		print(request.user)
-		user_list = ShareholderList.objects.filter(created_by=request.user)
+		user_list = ClientUser.objects.filter(created_by=request.user)
 		project_list = Projects.objects.filter(created_by=request.user)
 
 		context = {

@@ -8,7 +8,24 @@ from builder.models import *
 # Create your views here.
 
 def dashboard_client(request):
-	return render(request,'clients/dashboard.html')
+	projects = ShareholderList.objects.filter(user=request.user).count()
+	print(projects)
+	total_amount = 0
+	given_amount = CollectedAmount.objects.filter(from_user = request.user.id)
+	for i in given_amount:
+		total_amount += i.amount
+	print(total_amount)
+	datas = CollectedAmount.objects.filter(from_user=request.user.id)
+	total_given_amount = 0
+	for i in datas:
+		total_given_amount += i.amount
+	context = {
+		'projects':projects,
+		'total_amount':total_amount,
+		'datas':datas,
+		'total_given_amount':total_given_amount,
+	}
+	return render(request,'clients/dashboard.html',context)
 
 def update_profile(request):
 	if request.method == 'POST':

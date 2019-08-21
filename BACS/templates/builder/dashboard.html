@@ -18,7 +18,7 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>2</h3>
+              <h3>{{ total_projects }}</h3>
 
               <p>Total Projects</p>
             </div>
@@ -33,7 +33,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>2</h3>
+              <h3>{{ total_created_building }}</h3>
 
               <p>Total Created Building</p>
             </div>
@@ -48,7 +48,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>10</h3>
+              <h3>{{ total_shareholders }}</h3>
 
               <p>Total Shareholders</p>
             </div>
@@ -63,9 +63,9 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>10200000</h3>
+              <h3>{{ average_cost_per_building }}</h3>
 
-              <p>Total Income</p>
+              <p>Average Cost Per Building</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
@@ -75,6 +75,115 @@
         </div>
         <!-- ./col -->
       </div>
+      <!-- TABLE: LATEST ORDERS -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Latest Project List</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table id="example2" class="table table-striped table-bordered">
+                  <thead>
+                  <tr>
+                    <th>SI</th>
+                    <th>Project's Name</th>
+                    <th>Building's Name</th>
+                    <th>Address</th>
+                    <th>Builder's Name</th>
+                    <th>Builder's Address</th>
+                    <th>Estimated Cost</th>
+                    <th>Duration</th>
+                    <th>Total Floor</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in project_datas %}
+                      <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ i.pname }}</td>
+                        <td>{{ i.building_name }}</td>
+                        <td>{{ i.address }}</td>
+                        <td>{{ i.builders_name }}</td>
+                        <td>{{ i.builders_address }}</td>
+                        <td>{{ i.estimated_cost }}</td>
+                        <td>{{ i.duration }}</td>
+                        <td>{{ i.total_floor }}</td>
+                        <td>
+                          <a href="{% url 'edit_project' i.id %}" class="btn btn-primary a-btn-slide-text">
+                              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                              <span></span>
+                          </a>
+                          <a href="{% url 'delete_project' i.id %}" class="btn btn-danger a-btn-slide-text">
+                              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                              <span></span>
+                          </a>  
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+          </div>
+
+          <!-- TABLE: LATEST ORDERS -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Latest Client List</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table id="example2" class="table table-striped table-bordered">
+                  <thead>
+                  <tr>
+                    <th>SI</th>
+                    <th>User Name</th>
+                    <th>User Type</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in all_clients %}
+                      <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ i.user.username }}</td>
+                        <td>{{ i.user_type.name }}</td>
+                        <td>{{ i.user.email }}</td>
+                        <td>
+                          <a href="{% url 'edit_client' i.id %}" class="btn btn-primary a-btn-slide-text">
+                              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                              <span></span>
+                          </a>
+                          <a href="{% url 'delete_client' i.id %}" class="btn btn-danger a-btn-slide-text">
+                              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                              <span></span>
+                          </a>  
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+          </div>
     </section>
 </div>
 {% endblock content %}

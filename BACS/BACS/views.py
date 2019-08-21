@@ -17,6 +17,7 @@ def login_view(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
+        print(user)
         if user is not None:
             login(request, user)
             if request.user.groups.filter(name="builder").exists():
@@ -26,7 +27,7 @@ def login_view(request):
                 return redirect("/client/dashboard/")
         else:
             # Return an 'invalid login' error message.
-            messages.add_message(request, messages.ERROR, 'Wrong Username Or Password')
+            messages.success(request, ("Wrong Password or Username"))
             return HttpResponseRedirect(reverse('login'))
     else:
         return render(request,'login/login.html')

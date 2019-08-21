@@ -17,9 +17,9 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>2</h3>
+              <h3>{{ projects }}</h3>
 
-              <p>Total Projects</p>
+              <p>Total Shared Projects</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
@@ -32,9 +32,9 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>2</h3>
+              <h3>{{ total_amount }}</h3>
 
-              <p>Total Created Building</p>
+              <p> Total Given Amount </p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -43,9 +43,9 @@
           </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-6 col-xs-6">
+        <!-- <div class="col-lg-6 col-xs-6"> -->
           <!-- small box -->
-          <div class="small-box bg-yellow">
+          <!-- <div class="small-box bg-yellow">
             <div class="inner">
               <h3>7</h3>
 
@@ -56,11 +56,11 @@
             </div>
             <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
-        </div>
+        </div> -->
         <!-- ./col -->
-        <div class="col-lg-6 col-xs-6">
+        <!-- <div class="col-lg-6 col-xs-6"> -->
           <!-- small box -->
-          <div class="small-box bg-red">
+          <!-- <div class="small-box bg-red">
             <div class="inner">
               <h3>200000000</h3>
 
@@ -71,9 +71,53 @@
             </div>
             <a class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
-        </div>
+        </div> -->
         <!-- ./col -->
       </div>
+      <!-- TABLE: LATEST ORDERS -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Latest Given Amount Info</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>SI</th>
+                    <th>Date</th>
+                    <th>From User</th>
+                    <th>For Project</th>
+                    <th>Amount</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in datas %}
+                      <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ i.date }}</td>
+                        <td>{{ i.from_user }}</td>
+                        <td>{{ i.for_project.pname }}</td>
+                        <td>{{ i.amount }}</td>
+                      </tr>
+                    {% endfor %}
+                    <tr>
+                      <td colspan="4" style="text-align: right;"><b>Total Given Amount : </b></td>
+                      <td><b>{{ total_given_amount }}</b></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+          </div>
     </section>
 </div>
 {% endblock content %}

@@ -33,6 +33,14 @@
 </head>
 <body class="hold-transition login-page">
     <div class="login-box">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning alert-dismissable" role="alert">
+                    <button class="close" type="button" data-dismiss="alert">X</button>
+                    {{ message }}
+                </div>  
+            {% endfor %}
+        {% endif %}
         <div class="login-logo">
             <a href="#"><b>BACS</b></a>
         </div>
