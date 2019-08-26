@@ -23,7 +23,7 @@ def login_view(request):
             if request.user.groups.filter(name="builder").exists():
                 # user is belongs to account group
                 return redirect("/builder/dashboard/")
-            elif request.user.groups.filter(name="clients").exists():
+            elif request.user.groups.filter(name="client").exists():
                 return redirect("/client/dashboard/")
         else:
             # Return an 'invalid login' error message.

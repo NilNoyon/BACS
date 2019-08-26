@@ -15,9 +15,16 @@ def dashboard_builder(request):
 	total_projects = Projects.objects.filter(created_by=request.user.id).count()
 	total_created_building = Projects.objects.filter(created_by=request.user.id).count()
 	total_shareholders = ClientUser.objects.filter(created_by=request.user.id).count()
-	building_cost = Cost.objects.filter(created_by=request.user.id).aggregate(total_cost=Sum('cost'))
+	try:
+		building_cost = Cost.objects.filter(created_by=request.user.id).aggregate(total_cost=Sum('cost'))
+	except:
+		pass
 	print('cost: ',building_cost)
-	average_cost_per_building = round(building_cost['total_cost'] / total_created_building)
+	average_cost_per_building = 0
+	try:
+		average_cost_per_building = round(building_cost['total_cost'] / total_created_building)
+	except:
+		pass
 
 	data = Projects.objects.filter(created_by=request.user)[:5]
 	get_client = ClientUser.objects.filter(created_by=request.user)[:5]

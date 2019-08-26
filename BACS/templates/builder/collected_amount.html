@@ -22,25 +22,31 @@
               <td><input type="number" name="amount" required></td>
             </tr>
             <tr>
-              <td>Shareholders</td>
-              <td>
-                <select name="shareholder" class='form-control' style='width:100%' required>
-                    <option>-------</option>
-                     {% for user in user_list %}
-                          <option value="{{ user.user.id }}">{{ user.user.username }}</option>
-                      {% endfor %}
-                 </select>
-              </td>
-            </tr>
-            <tr>
               <td>Projects</td>
               <td>
-                <select name="project" class='form-control' style='width:100%' required>
+                <!-- <select name="project" onchange="UserList(this.value)" class='form-control' style='width:100%' required>
                     <option>-------</option>
                      {% for project in project_list %}
                           <option value="{{ project.id }}">{{ project.pname }}</option>
                       {% endfor %}
-                 </select>
+                 </select> -->
+                 <select name="project" onchange="UserList(this.value)" class="projectlist" style="width: 100%;height: 50%;" id="" required="">
+                      <option value="" selected="selected">Select Project</option>
+                  </select>
+              </td>
+            </tr>
+            <tr>
+              <td>Shareholders</td>
+              <td>
+                <!-- <select name="shareholder" class='form-control' style='width:100%' required>
+                    <option>-------</option>
+                     {% for user in user_list %}
+                          <option value="{{ user.user.id }}">{{ user.user.username }}</option>
+                      {% endfor %}
+                 </select> -->
+                 <select class="clientlist form-control" onChange="jsFunction(this.value)" id="selectOpt"  name="shareholder" style="width: 100%;">
+                    <option value="" selected="selected">Select User</option>
+                  </select>
               </td>
             </tr>
             <tr>
@@ -58,4 +64,58 @@
   </div>
 </section>
 </div>
+<script>
+        function jsFunction(){
+          var myselect = document.getElementById("selectOpt");
+          myselect.value = myselect.options[myselect.selectedIndex].value;
+        }
+        $(document).ready(function(){
+            $.ajax({
+                    url: "{% url "projects_api" %}",
+                    dataType: 'json',
+                    context: document.body, async:false,
+                    }).done(function(data) {
+                    console.log(data);
+
+                    for (var i = 0; i < data.length; i++) {
+                       $(".projectlist").append($('<option>', {value: data[i].id, text: data[i].pname}));
+                    }
+                    $(".projectlist").select2({
+
+                    });
+            });
+          
+      });
+    // get the User list against Project Name
+    function UserList(event){
+        $(".clientlist").select2({
+          ajax: {
+            url: "{% url "project_wise_client_list" %}",
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+              return {
+                id: event,
+                q: params.term, // search term
+                page: params.page
+              };
+            },
+
+            processResults: function (data, params) {
+              params.page = params.page || 1;
+                console.log(data);
+                d = _.map(data, function (value) {
+                        return {'id':value[0].user, 'text': value[1] };
+                    });
+                console.log(d);
+                console.log("data test");
+              return {
+                results: d
+              };
+            },
+        cache: true
+      }
+    });
+    }
+      </script>
 {% endblock content %}
